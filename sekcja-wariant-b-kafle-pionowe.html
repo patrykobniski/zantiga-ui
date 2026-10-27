@@ -25,7 +25,6 @@ body{margin:0;background:var(--bg);font-family:'Manrope',system-ui,sans-serif;co
 .vt__decor{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 .vt__inner{position:relative;max-width:1600px;margin:0 auto}
 .vt__title{margin:0;text-align:center;font-size:48px;line-height:1.15;font-weight:700;letter-spacing:-.01em}
-.vt__lead{margin:14px 0 0;text-align:center;font-size:19px;line-height:1.5;color:var(--muted)}
 .vt__grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:20px;margin:64px 0 0;padding:0;list-style:none}
 .vt__tile{position:relative;display:grid;grid-template-rows:250px 330px;transition:transform .25s ease}
 .vt__tile:hover{transform:translateY(-6px)}
@@ -49,7 +48,6 @@ body{margin:0;background:var(--bg);font-family:'Manrope',system-ui,sans-serif;co
 @media (max-width:900px){
   .vt{min-height:0;padding:56px 16px 64px}
   .vt__title{font-size:32px}
-  .vt__lead{font-size:17px}
   .vt__grid{grid-template-columns:1fr;margin-top:36px}
   .vt__tile{grid-template-rows:auto 0 auto}
   .vt__tile:hover{transform:none}
@@ -70,7 +68,6 @@ body{margin:0;background:var(--bg);font-family:'Manrope',system-ui,sans-serif;co
 
   <div class="vt__inner">
     <h2 class="vt__title" id="vt-title">Od chaosu w uprawnieniach do pełnej kontroli</h2>
-    <p class="vt__lead">Pięć problemów, które rozwiązujemy od pierwszego dnia wdrożenia</p>
 
     <ul class="vt__grid">
       <li class="vt__tile">

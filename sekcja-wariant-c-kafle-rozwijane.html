@@ -24,7 +24,6 @@ body{margin:0;background:var(--bg);font-family:'Manrope',system-ui,sans-serif;co
 .xt__decor{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 .xt__inner{position:relative;max-width:1600px;margin:0 auto}
 .xt__title{margin:0;text-align:center;font-size:48px;line-height:1.15;font-weight:700;letter-spacing:-.01em}
-.xt__lead{margin:14px 0 0;text-align:center;font-size:19px;line-height:1.5;color:var(--muted)}
 .xt__list{display:flex;gap:16px;height:580px;margin:64px 0 0;padding:0;list-style:none}
 .xt__tile{position:relative;flex:1 1 0;min-width:0;overflow:hidden;background:var(--tile);border:1px solid var(--tile-border);transition:flex-grow .5s cubic-bezier(.2,.8,.2,1),border-color .3s ease}
 .xt__tile::before{content:"";position:absolute;inset:0;background:var(--active);opacity:0;transition:opacity .4s ease}
@@ -61,7 +60,6 @@ body{margin:0;background:var(--bg);font-family:'Manrope',system-ui,sans-serif;co
 @media (max-width:900px){
   .xt{min-height:0;padding:56px 16px 64px}
   .xt__title{font-size:32px}
-  .xt__lead{display:none}
   .xt__list{flex-direction:column;height:auto;margin-top:36px}
   .xt__tile,.xt__tile.is-active{flex:none;border-color:transparent}
   .xt__tile::before{opacity:1}
@@ -86,7 +84,6 @@ body{margin:0;background:var(--bg);font-family:'Manrope',system-ui,sans-serif;co
 
   <div class="xt__inner">
     <h2 class="xt__title" id="xt-title">Twoje wyzwania kształtują nasze rozwiązania</h2>
-    <p class="xt__lead">Najedź na wyzwanie, żeby zobaczyć, jak je rozwiązujemy</p>
 
     <ul class="xt__list">
       <li class="xt__tile">
