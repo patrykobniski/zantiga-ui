@@ -85,7 +85,7 @@ body{margin:0;display:flex;flex-direction:column;background:var(--bg);color:#fff
     <button type="button" role="radio" data-variant="a" aria-checked="false">A · Pary w wierszach</button>
     <button type="button" role="radio" data-variant="b" aria-checked="false">B · Kafle pionowe</button>
     <button type="button" role="radio" data-variant="c" aria-checked="false">C · Kafle rozwijane</button>
-    <button type="button" role="radio" data-variant="d" aria-checked="false">D · Siatka kafli</button>
+    <!-- D · Siatka kafli jest ukryty. Plik: sekcja-wariant-d-siatka-kafli.html -->
   </div>
 </header>
 <iframe class="preview" id="preview" title="Podgląd wariantu sekcji"></iframe>
@@ -94,21 +94,23 @@ body{margin:0;display:flex;flex-direction:column;background:var(--bg);color:#fff
   var files = {
     a: "sekcja-wariant-a-pary-w-wierszach.html",
     b: "sekcja-wariant-b-kafle-pionowe.html",
-    c: "sekcja-wariant-c-kafle-rozwijane.html",
-    d: "sekcja-wariant-d-siatka-kafli.html"
+    c: "sekcja-wariant-c-kafle-rozwijane.html"
   };
   var titles = {
     a: "Wariant A — pary w wierszach",
     b: "Wariant B — kafle pionowe",
-    c: "Wariant C — kafle rozwijane",
-    d: "Wariant D — siatka kafli"
+    c: "Wariant C — kafle rozwijane"
   };
   var frame = document.getElementById("preview");
   var buttons = Array.prototype.slice.call(document.querySelectorAll("[data-variant]"));
 
   function current() {
     var id = (location.hash || "#a").slice(1);
-    return files[id] ? id : "a";
+    if (!files[id]) {
+      if (location.hash !== "#a") history.replaceState(null, "", "#a");
+      return "a";
+    }
+    return id;
   }
 
   function show(id, push) {
