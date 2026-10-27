@@ -1,0 +1,110 @@
+name: Deploy preview
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ftp-deploy-zantiga-ui
+  cancel-in-progress: true
+
+env:
+  DEPLOY_DIR: /zantiga-ui/
+  PUBLIC_URL: https://ux.dev-jaaqob.pl/zantiga-ui/
+
+jobs:
+  deploy:
+    name: Upload HTML preview
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate required FTP secrets
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+        run: |
+          missing=0
+          for name in FTP_SERVER FTP_USERNAME FTP_PASSWORD; do
+            if [ -z "${!name}" ]; then
+              echo "::error::$name is missing"
+              missing=1
+            else
+              echo "$name is set"
+            fi
+          done
+          exit "$missing"
+
+      - name: Stage site files
+        id: stage
+        run: |
+          mkdir -p dist
+          find . -mindepth 1 -maxdepth 1 \
+            ! -name dist \
+            ! -name .git \
+            ! -name .github \
+            ! -name .gitignore \
+            ! -name .env \
+            ! -name '.env.*' \
+            -exec cp -a {} dist/ \;
+          count=$(find dist -type f | wc -l | tr -d ' ')
+          echo "count=$count" >> "$GITHUB_OUTPUT"
+          echo "Public URL: ${{ env.PUBLIC_URL }}"
+          echo "Uploading to ${{ env.DEPLOY_DIR }}"
+          if [ "$count" -eq 0 ]; then
+            echo "Brak plików strony. Po dodaniu HTML i pushu na main podgląd wgra się sam."
+            exit 0
+          fi
+          find dist -type f | sort
+
+      - name: Upload to FTP
+        if: steps.stage.outputs.count != '0'
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.6
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftp
+          port: 21
+          local-dir: ./dist/
+          server-dir: ${{ env.DEPLOY_DIR }}
+          state-name: .ftp-deploy-sync-state.json
+          log-level: standard
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/.github/**
+            **/.DS_Store
+            **/.env
+            **/.env.*
+
+      - name: Verify live preview
+        if: steps.stage.outputs.count != '0'
+        run: |
+          if [ -f dist/index.html ]; then
+            URL="${{ env.PUBLIC_URL }}"
+          else
+            FILE=$(find dist -name '*.html' | head -n 1)
+            if [ -z "$FILE" ]; then
+              echo "Brak pliku HTML — pomijam weryfikację HTTP."
+              exit 0
+            fi
+            REL=${FILE#dist/}
+            URL="${{ env.PUBLIC_URL }}${REL}"
+          fi
+          echo "Checking $URL"
+          for i in 1 2 3 4 5; do
+            echo "Verify attempt $i..."
+            sleep $((i * 2))
+            code=$(curl -sS -o /tmp/preview.html -w "%{http_code}" -A "Mozilla/5.0" -H "Cache-Control: no-cache" -H "Pragma: no-cache" "$URL?nocache=${{ github.sha }}-$i") || continue
+            echo "HTTP $code"
+            if [ "$code" = "200" ] && grep -qi "<!doctype html\|<html" /tmp/preview.html; then
+              echo "OK: podgląd jest na serwerze — $URL"
+              exit 0
+            fi
+          done
+          echo "Verify failed after retries: $URL" >&2
+          exit 1
