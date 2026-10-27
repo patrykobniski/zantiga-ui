@@ -31,10 +31,14 @@ body{margin:0;background:var(--bg);font-family:'Manrope',system-ui,sans-serif;co
 .bt__tile:hover{transform:translateY(-4px);border-color:var(--accent)}
 .bt__tile--featured{background:var(--featured);border-color:transparent}
 .bt__tile--featured:hover{border-color:transparent}
+.bt__label{margin:0 0 8px;font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.bt__label--solution{margin:0 0 10px;color:var(--check)}
+.bt__tile--featured .bt__label{color:rgba(255,255,255,.72)}
+.bt__tile--featured .bt__label--solution{color:var(--check)}
 .bt__problem{display:flex;gap:10px;align-items:center;margin:0;font-size:16px;font-weight:700;color:var(--accent)}
 .bt__tile--featured .bt__problem{color:#fff}
 .bt__problem svg{flex:none}
-.bt__bar{width:48px;height:2px;margin:26px 0;background:var(--accent)}
+.bt__bar{width:48px;height:2px;margin:16px 0 14px;background:var(--accent)}
 .bt__tile--featured .bt__bar{background:var(--check)}
 .bt__tile h3{margin:0;font-size:28px;line-height:1.2;font-weight:800}
 .bt__tile p.bt__desc{margin:12px 0 0;font-size:17px;line-height:1.5;color:var(--text)}
@@ -77,36 +81,46 @@ body{margin:0;background:var(--bg);font-family:'Manrope',system-ui,sans-serif;co
 
     <ul class="bt__grid">
       <li class="bt__tile">
+        <p class="bt__label">Wyzwanie</p>
         <p class="bt__problem"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4"/><path d="M10.4 3.9 2.6 17.3A1.8 1.8 0 0 0 4.2 20h15.6a1.8 1.8 0 0 0 1.6-2.7L13.6 3.9a1.8 1.8 0 0 0-3.2 0z"/><path d="M12 16.5h.01"/></svg>Chaos informacyjny</p>
         <div class="bt__bar" aria-hidden="true"></div>
+        <p class="bt__label bt__label--solution">Rozwiązanie</p>
         <h3>Aktualne raporty uprawnień</h3>
         <p class="bt__desc">Szczegółowy wgląd w to, kto i do czego ma dostęp, w każdej chwili</p>
       </li>
 
       <li class="bt__tile">
+        <p class="bt__label">Wyzwanie</p>
         <p class="bt__problem"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4"/><path d="M10.4 3.9 2.6 17.3A1.8 1.8 0 0 0 4.2 20h15.6a1.8 1.8 0 0 0 1.6-2.7L13.6 3.9a1.8 1.8 0 0 0-3.2 0z"/><path d="M12 16.5h.01"/></svg>Papierowy obieg wniosków</p>
         <div class="bt__bar" aria-hidden="true"></div>
+        <p class="bt__label bt__label--solution">Rozwiązanie</p>
         <h3>Pełna automatyzacja</h3>
         <p class="bt__desc">Nadawanie i modyfikacja dostępów bez papierowych wniosków</p>
       </li>
 
       <li class="bt__tile bt__tile--featured">
+        <p class="bt__label">Wyzwanie</p>
         <p class="bt__problem"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4"/><path d="M10.4 3.9 2.6 17.3A1.8 1.8 0 0 0 4.2 20h15.6a1.8 1.8 0 0 0 1.6-2.7L13.6 3.9a1.8 1.8 0 0 0-3.2 0z"/><path d="M12 16.5h.01"/></svg>Brak przypomnień systemowych</p>
         <div class="bt__bar" aria-hidden="true"></div>
+        <p class="bt__label bt__label--solution">Rozwiązanie</p>
         <h3>Powiadomienia systemowe</h3>
         <p class="bt__desc">Alerty o wygasających dostępach i nieaktualnych uprawnieniach</p>
       </li>
 
       <li class="bt__tile">
+        <p class="bt__label">Wyzwanie</p>
         <p class="bt__problem"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4"/><path d="M10.4 3.9 2.6 17.3A1.8 1.8 0 0 0 4.2 20h15.6a1.8 1.8 0 0 0 1.6-2.7L13.6 3.9a1.8 1.8 0 0 0-3.2 0z"/><path d="M12 16.5h.01"/></svg>Ryzyko błędnych uprawnień</p>
         <div class="bt__bar" aria-hidden="true"></div>
+        <p class="bt__label bt__label--solution">Rozwiązanie</p>
         <h3>Certyfikacja uprawnień</h3>
         <p class="bt__desc">Inteligentny mechanizm regularnej kontroli dostępów</p>
       </li>
 
       <li class="bt__tile">
+        <p class="bt__label">Wyzwanie</p>
         <p class="bt__problem"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4"/><path d="M10.4 3.9 2.6 17.3A1.8 1.8 0 0 0 4.2 20h15.6a1.8 1.8 0 0 0 1.6-2.7L13.6 3.9a1.8 1.8 0 0 0-3.2 0z"/><path d="M12 16.5h.01"/></svg>Przeciążenie działu IT</p>
         <div class="bt__bar" aria-hidden="true"></div>
+        <p class="bt__label bt__label--solution">Rozwiązanie</p>
         <h3>Odciążenie zespołu IT</h3>
         <p class="bt__desc">Rutynowe procesy dzieją się automatycznie, a specjaliści wracają do ważnych zadań</p>
       </li>
