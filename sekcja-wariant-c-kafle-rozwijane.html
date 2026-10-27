@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wariant C - kafle rozwijane</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#1b0848;
+  --accent:#ff1fb4;
+  --tile:#22104f;
+  --tile-border:#6a2a8a;
+  --muted:#c9bde6;
+  --solution-text:#e4e0ff;
+  --check:#4be3a0;
+  --active:linear-gradient(150deg,#1a12b8 0%,#4a14c8 50%,#d80fae 100%);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);font-family:'Manrope',system-ui,sans-serif;color:#fff}
+.xt{position:relative;overflow:hidden;min-height:1080px;padding:84px 24px 96px;background:var(--bg)}
+.xt__decor{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.xt__inner{position:relative;max-width:1600px;margin:0 auto}
+.xt__title{margin:0;text-align:center;font-size:48px;line-height:1.15;font-weight:700;letter-spacing:-.01em}
+.xt__lead{margin:14px 0 0;text-align:center;font-size:19px;line-height:1.5;color:var(--muted)}
+.xt__list{display:flex;gap:16px;height:580px;margin:64px 0 0;padding:0;list-style:none}
+.xt__tile{position:relative;flex:1 1 0;min-width:0;overflow:hidden;background:var(--tile);border:1px solid var(--tile-border);transition:flex-grow .5s cubic-bezier(.2,.8,.2,1),border-color .3s ease}
+.xt__tile::before{content:"";position:absolute;inset:0;background:var(--active);opacity:0;transition:opacity .4s ease}
+.xt__tile:hover{border-color:var(--accent)}
+.xt__tile.is-active{flex-grow:2.4;border-color:transparent}
+.xt__tile.is-active::before{opacity:1}
+.xt__toggle{position:relative;display:flex;flex-direction:column;justify-content:space-between;width:100%;height:100%;padding:32px 26px;border:0;background:none;color:inherit;font:inherit;text-align:left;cursor:pointer;transition:opacity .2s ease}
+.xt__toggle:focus-visible{outline:2px solid #fff;outline-offset:-6px}
+.xt__tile.is-active .xt__toggle{opacity:0;pointer-events:none}
+.xt__row{display:flex;justify-content:space-between;align-items:center}
+.xt__num{font-size:14px;font-weight:700;letter-spacing:.12em;color:var(--muted)}
+.xt__ptitle{display:block;margin-top:14px;font-size:22px;line-height:1.25;font-weight:700;color:var(--accent)}
+.xt__panel{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:32px 40px;opacity:0;visibility:hidden;transition:opacity .25s ease,visibility 0s linear .25s}
+.xt__panel:focus{outline:none}
+.xt__panel:focus-visible{outline:2px solid #fff;outline-offset:-6px}
+.xt__tile.is-active .xt__panel{opacity:1;visibility:visible;transition:opacity .35s ease .25s,visibility 0s}
+.xt__panel .xt__num{color:var(--solution-text)}
+.xt__label{margin:0;font-size:13px;font-weight:700;letter-spacing:.12em;color:var(--solution-text)}
+.xt__label--ok{color:var(--check)}
+.xt__problem{margin:8px 0 0;font-size:20px;line-height:1.35;font-weight:500;color:var(--solution-text)}
+.xt__divider{height:1px;margin:32px 0;background:rgba(255,255,255,.25)}
+.xt__solution{display:flex;gap:14px;align-items:flex-start;margin-top:10px}
+.xt__solution svg{flex:none;margin-top:2px}
+.xt__solution h3{margin:0;font-size:34px;line-height:1.15;font-weight:800}
+.xt__solution p{margin:12px 0 0;font-size:18px;line-height:1.5}
+.xt__cta{display:flex;justify-content:center;margin-top:56px}
+.btn{display:inline-flex;align-items:center;justify-content:center;height:56px;padding:0 40px;border-radius:28px;background:var(--accent);color:var(--bg);font-size:15px;font-weight:800;letter-spacing:.1em;text-decoration:none;transition:transform .2s ease,box-shadow .2s ease}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(255,31,180,.35)}
+.btn:focus-visible{outline:2px solid #fff;outline-offset:3px}
+@media (max-width:1200px){
+  .xt__solution h3{font-size:28px}
+  .xt__panel{padding:28px 28px}
+}
+@media (max-width:900px){
+  .xt{min-height:0;padding:56px 16px 64px}
+  .xt__title{font-size:32px}
+  .xt__lead{display:none}
+  .xt__list{flex-direction:column;height:auto;margin-top:36px}
+  .xt__tile,.xt__tile.is-active{flex:none;border-color:transparent}
+  .xt__tile::before{opacity:1}
+  .xt__toggle{display:none}
+  .xt__panel{position:relative;opacity:1;visibility:visible;padding:24px 22px;gap:20px}
+  .xt__divider{margin:20px 0}
+  .xt__solution h3{font-size:24px}
+  .xt__solution p{font-size:16px}
+}
+@media (prefers-reduced-motion:reduce){
+  .xt__tile,.xt__tile::before,.xt__toggle,.xt__panel,.btn{transition:none !important}
+}
+</style>
+</head>
+<body>
+
+<section class="xt" aria-labelledby="xt-title">
+  <svg class="xt__decor" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" fill="none" aria-hidden="true">
+    <path d="M480 0 L1300 1080" stroke="#fff" stroke-opacity=".07"/>
+    <path d="M1660 0 C1760 40 1840 80 1920 100" stroke="#fff" stroke-opacity=".07"/>
+    <circle cx="1830" cy="1000" r="140" fill="#5a12d6" fill-opacity=".7"/>
+    <circle cx="1830" cy="1000" r="78" fill="#1b0848"/>
+  </svg>
+
+  <div class="xt__inner">
+    <h2 class="xt__title" id="xt-title">Twoje wyzwania kształtują nasze rozwiązania</h2>
+    <p class="xt__lead">Najedź na wyzwanie, żeby zobaczyć, jak je rozwiązujemy</p>
+
+    <ul class="xt__list">
+      <li class="xt__tile">
+        <button class="xt__toggle" type="button" aria-expanded="false" aria-controls="xt-p1">
+          <span class="xt__row"><span class="xt__num">01</span><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c9bde6" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span>
+          <span><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#ff1fb4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4"/><path d="M10.4 3.9 2.6 17.3A1.8 1.8 0 0 0 4.2 20h15.6a1.8 1.8 0 0 0 1.6-2.7L13.6 3.9a1.8 1.8 0 0 0-3.2 0z"/><path d="M12 16.5h.01"/></svg><span class="xt__ptitle">Chaos informacyjny</span></span>
+        </button>
+        <div class="xt__panel" id="xt-p1" tabindex="-1">
+          <span class="xt__num">01</span>
+          <div>
+            <p class="xt__label">WYZWANIE</p>
+            <p class="xt__problem">Chaos informacyjny, czyli brak szybkiego dostępu do wiedzy o uprawnieniach pracowników</p>
+            <div class="xt__divider"></div>
+            <p class="xt__label xt__label--ok">ROZWIĄZANIE</p>
+            <div class="xt__solution">
+              <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#4be3a0" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5L20 7"/></svg>
+              <div><h3>Aktualne raporty uprawnień</h3><p>Szczegółowy wgląd w to, kto i do czego ma dostęp, dostępny w każdej chwili</p></div>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="xt__tile">
+        <button class="xt__toggle" type="button" aria-expanded="false" aria-controls="xt-p2">
+          <span class="xt__row"><span class="xt__num">02</span><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c9bde6" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span>
+          <span><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#ff1fb4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4"/><path d="M10.4 3.9 2.6 17.3A1.8 1.8 0 0 0 4.2 20h15.6a1.8 1.8 0 0 0 1.6-2.7L13.6 3.9a1.8 1.8 0 0 0-3.2 0z"/><path d="M12 16.5h.01"/></svg><span class="xt__ptitle">Papierowy obieg wniosków</span></span>
+        </button>
+        <div class="xt__panel" id="xt-p2" tabindex="-1">
+          <span class="xt__num">02</span>
+          <div>
+            <p class="xt__label">WYZWANIE</p>
+            <p class="xt__problem">Papierowy obieg wniosków, czyli czasochłonny proces nadawania dostępów</p>
+            <div class="xt__divider"></div>
+            <p class="xt__label xt__label--ok">ROZWIĄZANIE</p>
+            <div class="xt__solution">
+              <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#4be3a0" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5L20 7"/></svg>
+              <div><h3>Pełna automatyzacja</h3><p>Nadawanie i modyfikacja dostępów odbywają się w systemie, bez papierowych wniosków</p></div>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="xt__tile is-active">
+        <button class="xt__toggle" type="button" aria-expanded="true" aria-controls="xt-p3">
+          <span class="xt__row"><span class="xt__num">03</span><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c9bde6" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span>
+          <span><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#ff1fb4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4"/><path d="M10.4 3.9 2.6 17.3A1.8 1.8 0 0 0 4.2 20h15.6a1.8 1.8 0 0 0 1.6-2.7L13.6 3.9a1.8 1.8 0 0 0-3.2 0z"/><path d="M12 16.5h.01"/></svg><span class="xt__ptitle">Brak przypomnień systemowych</span></span>
+        </button>
+        <div class="xt__panel" id="xt-p3" tabindex="-1">
+          <span class="xt__num">03</span>
+          <div>
+            <p class="xt__label">WYZWANIE</p>
+            <p class="xt__problem">Brak przypomnień systemowych, czyli ryzyko braku przedłużenia lub odebrania uprawnień</p>
+            <div class="xt__divider"></div>
+            <p class="xt__label xt__label--ok">ROZWIĄZANIE</p>
+            <div class="xt__solution">
+              <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#4be3a0" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5L20 7"/></svg>
+              <div><h3>Powiadomienia systemowe</h3><p>Automatyczne alerty o wygasających dostępach i nieaktualnych uprawnieniach, zanim staną się problemem</p></div>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="xt__tile">
+        <button class="xt__toggle" type="button" aria-expanded="false" aria-controls="xt-p4">
+          <span class="xt__row"><span class="xt__num">04</span><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c9bde6" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span>
+          <span><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#ff1fb4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4"/><path d="M10.4 3.9 2.6 17.3A1.8 1.8 0 0 0 4.2 20h15.6a1.8 1.8 0 0 0 1.6-2.7L13.6 3.9a1.8 1.8 0 0 0-3.2 0z"/><path d="M12 16.5h.01"/></svg><span class="xt__ptitle">Ryzyko błędnych uprawnień</span></span>
+        </button>
+        <div class="xt__panel" id="xt-p4" tabindex="-1">
+          <span class="xt__num">04</span>
+          <div>
+            <p class="xt__label">WYZWANIE</p>
+            <p class="xt__problem">Ryzyko błędnych uprawnień, czyli dostępy niezgodne z rolą i zakresem obowiązków</p>
+            <div class="xt__divider"></div>
+            <p class="xt__label xt__label--ok">ROZWIĄZANIE</p>
+            <div class="xt__solution">
+              <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#4be3a0" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5L20 7"/></svg>
+              <div><h3>Certyfikacja uprawnień</h3><p>Inteligentny mechanizm regularnej kontroli, który wychwytuje nadmiarowe i błędne dostępy</p></div>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="xt__tile">
+        <button class="xt__toggle" type="button" aria-expanded="false" aria-controls="xt-p5">
+          <span class="xt__row"><span class="xt__num">05</span><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c9bde6" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span>
+          <span><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#ff1fb4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4"/><path d="M10.4 3.9 2.6 17.3A1.8 1.8 0 0 0 4.2 20h15.6a1.8 1.8 0 0 0 1.6-2.7L13.6 3.9a1.8 1.8 0 0 0-3.2 0z"/><path d="M12 16.5h.01"/></svg><span class="xt__ptitle">Przeciążenie działu IT</span></span>
+        </button>
+        <div class="xt__panel" id="xt-p5" tabindex="-1">
+          <span class="xt__num">05</span>
+          <div>
+            <p class="xt__label">WYZWANIE</p>
+            <p class="xt__problem">Przeciążenie działu IT, czyli specjaliści tracący czas na powtarzalne zadania</p>
+            <div class="xt__divider"></div>
+            <p class="xt__label xt__label--ok">ROZWIĄZANIE</p>
+            <div class="xt__solution">
+              <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#4be3a0" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5L20 7"/></svg>
+              <div><h3>Odciążenie zespołu IT</h3><p>Rutynowe procesy dzieją się automatycznie, a specjaliści wracają do ważnych zadań</p></div>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+
+    <div class="xt__cta">
+      <a class="btn" href="#kontakt">UMÓW PREZENTACJĘ</a>
+    </div>
+  </div>
+</section>
+
+<script>
+(function () {
+  var tiles = Array.prototype.slice.call(document.querySelectorAll('.xt__tile'));
+  function activate(index) {
+    tiles.forEach(function (tile, i) {
+      var on = i === index;
+      tile.classList.toggle('is-active', on);
+      tile.querySelector('.xt__toggle').setAttribute('aria-expanded', on ? 'true' : 'false');
+    });
+  }
+  tiles.forEach(function (tile, i) {
+    tile.addEventListener('mouseenter', function () { activate(i); });
+    tile.querySelector('.xt__toggle').addEventListener('click', function () {
+      activate(i);
+      tile.querySelector('.xt__panel').focus();
+    });
+  });
+})();
+</script>
+</body>
+</html>

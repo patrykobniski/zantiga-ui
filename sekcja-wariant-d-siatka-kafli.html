@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wariant D - siatka kafli</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#1b0848;
+  --accent:#ff1fb4;
+  --tile:#22104f;
+  --tile-border:#6a2a8a;
+  --muted:#c9bde6;
+  --text:#d4c9ee;
+  --text-on-gradient:#e4e0ff;
+  --check:#4be3a0;
+  --featured:linear-gradient(150deg,#1a12b8 0%,#4a14c8 55%,#c80fb0 100%);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);font-family:'Manrope',system-ui,sans-serif;color:#fff}
+.bt{position:relative;overflow:hidden;min-height:1080px;padding:96px 24px 96px;background:var(--bg)}
+.bt__decor{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.bt__inner{position:relative;max-width:1600px;margin:0 auto}
+.bt__title{margin:0;text-align:center;font-size:48px;line-height:1.15;font-weight:700;letter-spacing:-.01em}
+.bt__lead{margin:14px 0 0;text-align:center;font-size:19px;line-height:1.5;color:var(--muted)}
+.bt__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-auto-rows:minmax(310px,auto);gap:24px;margin:64px 0 0;padding:0;list-style:none}
+.bt__tile{display:flex;flex-direction:column;padding:34px 36px;background:var(--tile);border:1px solid var(--tile-border);transition:transform .25s ease,border-color .25s ease}
+.bt__tile:hover{transform:translateY(-4px);border-color:var(--accent)}
+.bt__tile--featured{background:var(--featured);border-color:transparent}
+.bt__tile--featured:hover{border-color:transparent}
+.bt__problem{display:flex;gap:10px;align-items:center;margin:0;font-size:16px;font-weight:700;color:var(--accent)}
+.bt__tile--featured .bt__problem{color:#fff}
+.bt__problem svg{flex:none}
+.bt__bar{width:48px;height:2px;margin:26px 0;background:var(--accent)}
+.bt__tile--featured .bt__bar{background:var(--check)}
+.bt__tile h3{margin:0;font-size:28px;line-height:1.2;font-weight:800}
+.bt__tile p.bt__desc{margin:12px 0 0;font-size:17px;line-height:1.5;color:var(--text)}
+.bt__tile--featured p.bt__desc{color:var(--text-on-gradient)}
+.bt__tile--cta{justify-content:space-between;gap:28px;background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.bt__tile--cta:hover{border-color:var(--accent)}
+.bt__tile--cta h3{font-size:30px}
+.bt__tile--cta p.bt__desc{color:var(--bg);font-weight:500}
+.btn{align-self:flex-start;display:inline-flex;align-items:center;gap:10px;height:56px;padding:0 32px;border-radius:28px;background:var(--bg);color:#fff;font-size:15px;font-weight:800;letter-spacing:.1em;text-decoration:none;transition:transform .2s ease}
+.btn:hover{transform:translateX(4px)}
+.btn:focus-visible{outline:2px solid var(--bg);outline-offset:3px}
+@media (max-width:1200px){
+  .bt__grid{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:auto}
+}
+@media (max-width:760px){
+  .bt{min-height:0;padding:56px 16px 64px}
+  .bt__title{font-size:32px}
+  .bt__lead{font-size:17px}
+  .bt__grid{grid-template-columns:1fr;gap:16px;margin-top:36px}
+  .bt__tile{padding:26px 22px}
+  .bt__tile:hover{transform:none}
+  .bt__bar{margin:18px 0}
+  .bt__tile h3,.bt__tile--cta h3{font-size:24px}
+  .bt__tile p.bt__desc{font-size:16px}
+}
+@media (prefers-reduced-motion:reduce){.bt__tile,.btn{transition:none}}
+</style>
+</head>
+<body>
+
+<section class="bt" aria-labelledby="bt-title">
+  <svg class="bt__decor" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" fill="none" aria-hidden="true">
+    <path d="M0 320 L760 1080" stroke="#fff" stroke-opacity=".07"/>
+    <path d="M820 0 C1200 160 1600 220 1920 140" stroke="#fff" stroke-opacity=".07"/>
+    <circle cx="90" cy="1040" r="150" fill="#ff1fb4" fill-opacity=".85"/>
+    <circle cx="90" cy="1040" r="84" fill="#1b0848"/>
+  </svg>
+
+  <div class="bt__inner">
+    <h2 class="bt__title" id="bt-title">Twoje wyzwania kształtują nasze rozwiązania</h2>
+    <p class="bt__lead">Każdy kafel to jeden problem i sposób, w jaki go eliminujemy</p>
+
+    <ul class="bt__grid">
+      <li class="bt__tile">
+        <p class="bt__problem"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4"/><path d="M10.4 3.9 2.6 17.3A1.8 1.8 0 0 0 4.2 20h15.6a1.8 1.8 0 0 0 1.6-2.7L13.6 3.9a1.8 1.8 0 0 0-3.2 0z"/><path d="M12 16.5h.01"/></svg>Chaos informacyjny</p>
+        <div class="bt__bar" aria-hidden="true"></div>
+        <h3>Aktualne raporty uprawnień</h3>
+        <p class="bt__desc">Szczegółowy wgląd w to, kto i do czego ma dostęp, w każdej chwili</p>
+      </li>
+
+      <li class="bt__tile">
+        <p class="bt__problem"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4"/><path d="M10.4 3.9 2.6 17.3A1.8 1.8 0 0 0 4.2 20h15.6a1.8 1.8 0 0 0 1.6-2.7L13.6 3.9a1.8 1.8 0 0 0-3.2 0z"/><path d="M12 16.5h.01"/></svg>Papierowy obieg wniosków</p>
+        <div class="bt__bar" aria-hidden="true"></div>
+        <h3>Pełna automatyzacja</h3>
+        <p class="bt__desc">Nadawanie i modyfikacja dostępów bez papierowych wniosków</p>
+      </li>
+
+      <li class="bt__tile bt__tile--featured">
+        <p class="bt__problem"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4"/><path d="M10.4 3.9 2.6 17.3A1.8 1.8 0 0 0 4.2 20h15.6a1.8 1.8 0 0 0 1.6-2.7L13.6 3.9a1.8 1.8 0 0 0-3.2 0z"/><path d="M12 16.5h.01"/></svg>Brak przypomnień systemowych</p>
+        <div class="bt__bar" aria-hidden="true"></div>
+        <h3>Powiadomienia systemowe</h3>
+        <p class="bt__desc">Alerty o wygasających dostępach i nieaktualnych uprawnieniach</p>
+      </li>
+
+      <li class="bt__tile">
+        <p class="bt__problem"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4"/><path d="M10.4 3.9 2.6 17.3A1.8 1.8 0 0 0 4.2 20h15.6a1.8 1.8 0 0 0 1.6-2.7L13.6 3.9a1.8 1.8 0 0 0-3.2 0z"/><path d="M12 16.5h.01"/></svg>Ryzyko błędnych uprawnień</p>
+        <div class="bt__bar" aria-hidden="true"></div>
+        <h3>Certyfikacja uprawnień</h3>
+        <p class="bt__desc">Inteligentny mechanizm regularnej kontroli dostępów</p>
+      </li>
+
+      <li class="bt__tile">
+        <p class="bt__problem"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4"/><path d="M10.4 3.9 2.6 17.3A1.8 1.8 0 0 0 4.2 20h15.6a1.8 1.8 0 0 0 1.6-2.7L13.6 3.9a1.8 1.8 0 0 0-3.2 0z"/><path d="M12 16.5h.01"/></svg>Przeciążenie działu IT</p>
+        <div class="bt__bar" aria-hidden="true"></div>
+        <h3>Odciążenie zespołu IT</h3>
+        <p class="bt__desc">Rutynowe procesy dzieją się automatycznie, a specjaliści wracają do ważnych zadań</p>
+      </li>
+
+      <li class="bt__tile bt__tile--cta">
+        <div>
+          <h3>Zobacz, jak to działa w Twojej organizacji</h3>
+          <p class="bt__desc">Pokażemy system na przykładach z Twojej branży</p>
+        </div>
+        <a class="btn" href="#kontakt">UMÓW PREZENTACJĘ<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></a>
+      </li>
+    </ul>
+  </div>
+</section>
+
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wyzwania i rozwiązania</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#1b0848;
+  --accent:#ff1fb4;
+  --problem-bg:#22104f;
+  --problem-border:#6a2a8a;
+  --connector:#2d1270;
+  --muted:#c9bde6;
+  --problem-text:#d4c9ee;
+  --solution-text:#e4e0ff;
+  --check:#4be3a0;
+  --solution:linear-gradient(100deg,#1a12b8 0%,#3a14c8 45%,#8a12c8 80%,#d80fae 100%);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);font-family:'Manrope',system-ui,sans-serif;color:#fff}
+.challenges{position:relative;overflow:hidden;min-height:1080px;background:var(--bg);padding:84px 24px 96px}
+.challenges__decor{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.challenges__inner{position:relative;max-width:1240px;margin:0 auto}
+.challenges__title{margin:0;text-align:center;font-size:48px;line-height:1.15;font-weight:700;letter-spacing:-.01em}
+.challenges__lead{margin:14px 0 0;text-align:center;font-size:19px;line-height:1.5;color:var(--muted)}
+.challenges__head,.pair{display:grid;grid-template-columns:1fr 72px 1fr}
+.challenges__head{margin:52px 0 14px;font-size:13px;font-weight:700;letter-spacing:.12em}
+.challenges__head span{padding-left:28px}
+.challenges__head span:first-child{color:var(--muted)}
+.pairs{display:flex;flex-direction:column;gap:14px;margin:0;padding:0;list-style:none}
+.pair{min-height:100px;transition:transform .25s ease}
+.pair:hover{transform:translateX(4px)}
+.pair__problem,.pair__solution{display:flex;gap:16px;align-items:flex-start;padding:20px 28px}
+.pair__problem{background:var(--problem-bg);border:1px solid var(--problem-border);transition:border-color .25s ease}
+.pair:hover .pair__problem{border-color:var(--accent)}
+.pair__solution{background:var(--solution)}
+.pair__arrow{display:flex;align-items:center;justify-content:center;background:var(--connector);color:var(--accent)}
+.pair svg{flex:none}
+.pair__icon{margin-top:2px}
+.pair h3{margin:0;font-size:20px;font-weight:700;line-height:1.3}
+.pair__problem h3{color:var(--accent)}
+.pair p{margin:6px 0 0;font-size:16px;line-height:1.45}
+.pair__problem p{color:var(--problem-text)}
+.pair__solution p{color:var(--solution-text)}
+.challenges__cta{display:flex;justify-content:center;margin-top:48px}
+.btn{display:inline-flex;align-items:center;justify-content:center;height:56px;padding:0 40px;border-radius:28px;background:var(--accent);color:var(--bg);font-size:15px;font-weight:800;letter-spacing:.1em;text-decoration:none;transition:transform .2s ease,box-shadow .2s ease}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(255,31,180,.35)}
+.btn:focus-visible{outline:2px solid #fff;outline-offset:3px}
+@media (max-width:900px){
+  .challenges{min-height:0;padding:56px 16px 64px}
+  .challenges__title{font-size:32px}
+  .challenges__lead{font-size:17px}
+  .challenges__head{display:none}
+  .pairs{margin-top:36px}
+  .pair{grid-template-columns:1fr;grid-template-rows:auto 40px auto}
+  .pair:hover{transform:none}
+  .pair__arrow svg{transform:rotate(90deg)}
+  .pair__problem,.pair__solution{padding:18px 20px}
+  .pair h3{font-size:18px}
+  .pair p{font-size:15px}
+}
+@media (prefers-reduced-motion:reduce){.pair,.btn{transition:none}}
+</style>
+</head>
+<body>
+
+<section class="challenges" aria-labelledby="challenges-title">
+  <svg class="challenges__decor" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" fill="none" aria-hidden="true">
+    <path d="M480 0 L1300 1080" stroke="#fff" stroke-opacity=".07"/>
+    <path d="M0 320 L760 1080" stroke="#fff" stroke-opacity=".07"/>
+    <path d="M820 0 C1200 160 1600 220 1920 140" stroke="#fff" stroke-opacity=".07"/>
+    <path d="M1660 0 C1760 40 1840 80 1920 100" stroke="#fff" stroke-opacity=".07"/>
+    <circle cx="140" cy="1000" r="170" fill="#ff1fb4" fill-opacity=".85"/>
+    <circle cx="140" cy="1000" r="95" fill="#1b0848"/>
+    <circle cx="1830" cy="980" r="120" fill="#5a12d6" fill-opacity=".7"/>
+    <circle cx="1830" cy="980" r="66" fill="#1b0848"/>
+  </svg>
+
+  <div class="challenges__inner">
+    <h2 class="challenges__title" id="challenges-title">Od chaosu w uprawnieniach do pełnej kontroli</h2>
+    <p class="challenges__lead">Każde wyzwanie ma u nas konkretną odpowiedź</p>
+
+    <div class="challenges__head" aria-hidden="true">
+      <span>BEZ SYSTEMU</span><span></span><span>Z SYSTEMEM</span>
+    </div>
+
+    <ul class="pairs">
+      <li class="pair">
+        <div class="pair__problem">
+          <svg class="pair__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ff1fb4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4"/><path d="M10.4 3.9 2.6 17.3A1.8 1.8 0 0 0 4.2 20h15.6a1.8 1.8 0 0 0 1.6-2.7L13.6 3.9a1.8 1.8 0 0 0-3.2 0z"/><path d="M12 16.5h.01"/></svg>
+          <div><h3>Chaos informacyjny</h3><p>Brak szybkiego dostępu do wiedzy o uprawnieniach pracowników</p></div>
+        </div>
+        <div class="pair__arrow"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></div>
+        <div class="pair__solution">
+          <svg class="pair__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4be3a0" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5L20 7"/></svg>
+          <div><h3>Aktualne raporty uprawnień</h3><p>Szczegółowy wgląd w nadane dostępy w każdej chwili</p></div>
+        </div>
+      </li>
+
+      <li class="pair">
+        <div class="pair__problem">
+          <svg class="pair__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ff1fb4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4"/><path d="M10.4 3.9 2.6 17.3A1.8 1.8 0 0 0 4.2 20h15.6a1.8 1.8 0 0 0 1.6-2.7L13.6 3.9a1.8 1.8 0 0 0-3.2 0z"/><path d="M12 16.5h.01"/></svg>
+          <div><h3>Papierowy obieg wniosków</h3><p>Czasochłonny proces nadawania dostępów</p></div>
+        </div>
+        <div class="pair__arrow"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></div>
+        <div class="pair__solution">
+          <svg class="pair__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4be3a0" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5L20 7"/></svg>
+          <div><h3>Pełna automatyzacja</h3><p>Nadawanie i modyfikacja dostępów bez papierowych wniosków</p></div>
+        </div>
+      </li>
+
+      <li class="pair">
+        <div class="pair__problem">
+          <svg class="pair__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ff1fb4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4"/><path d="M10.4 3.9 2.6 17.3A1.8 1.8 0 0 0 4.2 20h15.6a1.8 1.8 0 0 0 1.6-2.7L13.6 3.9a1.8 1.8 0 0 0-3.2 0z"/><path d="M12 16.5h.01"/></svg>
+          <div><h3>Brak przypomnień systemowych</h3><p>Ryzyko braku przedłużenia lub odebrania uprawnień</p></div>
+        </div>
+        <div class="pair__arrow"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></div>
+        <div class="pair__solution">
+          <svg class="pair__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4be3a0" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5L20 7"/></svg>
+          <div><h3>Powiadomienia systemowe</h3><p>Alerty o wygasających i nieaktualnych dostępach</p></div>
+        </div>
+      </li>
+
+      <li class="pair">
+        <div class="pair__problem">
+          <svg class="pair__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ff1fb4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4"/><path d="M10.4 3.9 2.6 17.3A1.8 1.8 0 0 0 4.2 20h15.6a1.8 1.8 0 0 0 1.6-2.7L13.6 3.9a1.8 1.8 0 0 0-3.2 0z"/><path d="M12 16.5h.01"/></svg>
+          <div><h3>Ryzyko błędnych uprawnień</h3><p>Dostępy niezgodne z rolą i zakresem obowiązków</p></div>
+        </div>
+        <div class="pair__arrow"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></div>
+        <div class="pair__solution">
+          <svg class="pair__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4be3a0" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5L20 7"/></svg>
+          <div><h3>Certyfikacja uprawnień</h3><p>Inteligentny mechanizm regularnej kontroli dostępów</p></div>
+        </div>
+      </li>
+
+      <li class="pair">
+        <div class="pair__problem">
+          <svg class="pair__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ff1fb4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4"/><path d="M10.4 3.9 2.6 17.3A1.8 1.8 0 0 0 4.2 20h15.6a1.8 1.8 0 0 0 1.6-2.7L13.6 3.9a1.8 1.8 0 0 0-3.2 0z"/><path d="M12 16.5h.01"/></svg>
+          <div><h3>Przeciążenie działu IT</h3><p>Specjaliści tracą czas na powtarzalne zadania</p></div>
+        </div>
+        <div class="pair__arrow"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></div>
+        <div class="pair__solution">
+          <svg class="pair__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4be3a0" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5L20 7"/></svg>
+          <div><h3>Odciążenie zespołu IT</h3><p>Rutynowe procesy dzieją się automatycznie</p></div>
+        </div>
+      </li>
+    </ul>
+
+    <div class="challenges__cta">
+      <a class="btn" href="#kontakt">UMÓW PREZENTACJĘ</a>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

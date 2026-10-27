@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wariant B - kafle pionowe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#1b0848;
+  --accent:#ff1fb4;
+  --tile:#22104f;
+  --tile-border:#6a2a8a;
+  --muted:#c9bde6;
+  --problem-text:#d4c9ee;
+  --solution-text:#e4e0ff;
+  --check:#4be3a0;
+  --solution:linear-gradient(165deg,#1a12b8 0%,#4a14c8 55%,#c80fb0 100%);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);font-family:'Manrope',system-ui,sans-serif;color:#fff}
+.vt{position:relative;overflow:hidden;min-height:1080px;padding:84px 24px 96px;background:var(--bg)}
+.vt__decor{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.vt__inner{position:relative;max-width:1600px;margin:0 auto}
+.vt__title{margin:0;text-align:center;font-size:48px;line-height:1.15;font-weight:700;letter-spacing:-.01em}
+.vt__lead{margin:14px 0 0;text-align:center;font-size:19px;line-height:1.5;color:var(--muted)}
+.vt__grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:20px;margin:64px 0 0;padding:0;list-style:none}
+.vt__tile{position:relative;display:grid;grid-template-rows:250px 330px;transition:transform .25s ease}
+.vt__tile:hover{transform:translateY(-6px)}
+.vt__problem{background:var(--tile);border:1px solid var(--tile-border);padding:30px 28px;transition:border-color .25s ease}
+.vt__tile:hover .vt__problem{border-color:var(--accent)}
+.vt__solution{background:var(--solution);padding:56px 28px 30px}
+.vt__num{display:block;margin:0 0 18px;font-size:14px;font-weight:700;letter-spacing:.12em;color:var(--muted)}
+.vt h3{margin:12px 0 0;font-size:21px;line-height:1.25;font-weight:700}
+.vt__problem h3{color:var(--accent)}
+.vt p{margin:8px 0 0;font-size:15px;line-height:1.45}
+.vt__problem p{color:var(--problem-text)}
+.vt__solution p{color:var(--solution-text)}
+.vt__link{position:absolute;top:222px;left:50%;width:56px;height:56px;margin-left:-28px;border-radius:50%;background:var(--accent);border:4px solid var(--bg);display:flex;align-items:center;justify-content:center;color:var(--bg)}
+.vt__cta{display:flex;justify-content:center;margin-top:56px}
+.btn{display:inline-flex;align-items:center;justify-content:center;height:56px;padding:0 40px;border-radius:28px;background:var(--accent);color:var(--bg);font-size:15px;font-weight:800;letter-spacing:.1em;text-decoration:none;transition:transform .2s ease,box-shadow .2s ease}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(255,31,180,.35)}
+.btn:focus-visible{outline:2px solid #fff;outline-offset:3px}
+@media (max-width:1400px){
+  .vt__grid{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:32px}
+}
+@media (max-width:900px){
+  .vt{min-height:0;padding:56px 16px 64px}
+  .vt__title{font-size:32px}
+  .vt__lead{font-size:17px}
+  .vt__grid{grid-template-columns:1fr;margin-top:36px}
+  .vt__tile{grid-template-rows:auto 0 auto}
+  .vt__tile:hover{transform:none}
+  .vt__problem{grid-row:1;padding:24px 22px 40px}
+  .vt__solution{grid-row:3;padding:40px 22px 24px}
+  .vt__link{position:relative;grid-row:2;top:auto;left:auto;margin:-28px auto 0;z-index:1}
+}
+@media (prefers-reduced-motion:reduce){.vt__tile,.btn{transition:none}}
+</style>
+</head>
+<body>
+
+<section class="vt" aria-labelledby="vt-title">
+  <svg class="vt__decor" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" fill="none" aria-hidden="true">
+    <path d="M480 0 L1300 1080" stroke="#fff" stroke-opacity=".07"/>
+    <path d="M820 0 C1200 160 1600 220 1920 140" stroke="#fff" stroke-opacity=".07"/>
+    <circle cx="90" cy="1040" r="150" fill="#ff1fb4" fill-opacity=".85"/>
+    <circle cx="90" cy="1040" r="84" fill="#1b0848"/>
+  </svg>
+
+  <div class="vt__inner">
+    <h2 class="vt__title" id="vt-title">Od chaosu w uprawnieniach do pełnej kontroli</h2>
+    <p class="vt__lead">Pięć problemów, które rozwiązujemy od pierwszego dnia wdrożenia</p>
+
+    <ul class="vt__grid">
+      <li class="vt__tile">
+        <div class="vt__problem">
+          <span class="vt__num">01</span>
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ff1fb4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4"/><path d="M10.4 3.9 2.6 17.3A1.8 1.8 0 0 0 4.2 20h15.6a1.8 1.8 0 0 0 1.6-2.7L13.6 3.9a1.8 1.8 0 0 0-3.2 0z"/><path d="M12 16.5h.01"/></svg>
+          <h3>Chaos informacyjny</h3>
+          <p>Brak szybkiego dostępu do wiedzy o uprawnieniach</p>
+        </div>
+        <div class="vt__solution">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#4be3a0" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5L20 7"/></svg>
+          <h3>Aktualne raporty uprawnień</h3>
+          <p>Szczegółowy wgląd w nadane dostępy w każdej chwili</p>
+        </div>
+        <span class="vt__link" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m6 13 6 6 6-6"/></svg></span>
+      </li>
+
+      <li class="vt__tile">
+        <div class="vt__problem">
+          <span class="vt__num">02</span>
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ff1fb4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4"/><path d="M10.4 3.9 2.6 17.3A1.8 1.8 0 0 0 4.2 20h15.6a1.8 1.8 0 0 0 1.6-2.7L13.6 3.9a1.8 1.8 0 0 0-3.2 0z"/><path d="M12 16.5h.01"/></svg>
+          <h3>Papierowy obieg wniosków</h3>
+          <p>Czasochłonny proces nadawania dostępów</p>
+        </div>
+        <div class="vt__solution">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#4be3a0" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5L20 7"/></svg>
+          <h3>Pełna automatyzacja</h3>
+          <p>Nadawanie i modyfikacja dostępów bez papierowych wniosków</p>
+        </div>
+        <span class="vt__link" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m6 13 6 6 6-6"/></svg></span>
+      </li>
+
+      <li class="vt__tile">
+        <div class="vt__problem">
+          <span class="vt__num">03</span>
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ff1fb4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4"/><path d="M10.4 3.9 2.6 17.3A1.8 1.8 0 0 0 4.2 20h15.6a1.8 1.8 0 0 0 1.6-2.7L13.6 3.9a1.8 1.8 0 0 0-3.2 0z"/><path d="M12 16.5h.01"/></svg>
+          <h3>Brak przypomnień systemowych</h3>
+          <p>Ryzyko braku przedłużenia lub odebrania uprawnień</p>
+        </div>
+        <div class="vt__solution">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#4be3a0" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5L20 7"/></svg>
+          <h3>Powiadomienia systemowe</h3>
+          <p>Alerty o wygasających i nieaktualnych dostępach</p>
+        </div>
+        <span class="vt__link" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m6 13 6 6 6-6"/></svg></span>
+      </li>
+
+      <li class="vt__tile">
+        <div class="vt__problem">
+          <span class="vt__num">04</span>
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ff1fb4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4"/><path d="M10.4 3.9 2.6 17.3A1.8 1.8 0 0 0 4.2 20h15.6a1.8 1.8 0 0 0 1.6-2.7L13.6 3.9a1.8 1.8 0 0 0-3.2 0z"/><path d="M12 16.5h.01"/></svg>
+          <h3>Ryzyko błędnych uprawnień</h3>
+          <p>Dostępy niezgodne z rolą i zakresem obowiązków</p>
+        </div>
+        <div class="vt__solution">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#4be3a0" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5L20 7"/></svg>
+          <h3>Certyfikacja uprawnień</h3>
+          <p>Inteligentny mechanizm regularnej kontroli dostępów</p>
+        </div>
+        <span class="vt__link" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m6 13 6 6 6-6"/></svg></span>
+      </li>
+
+      <li class="vt__tile">
+        <div class="vt__problem">
+          <span class="vt__num">05</span>
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ff1fb4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4"/><path d="M10.4 3.9 2.6 17.3A1.8 1.8 0 0 0 4.2 20h15.6a1.8 1.8 0 0 0 1.6-2.7L13.6 3.9a1.8 1.8 0 0 0-3.2 0z"/><path d="M12 16.5h.01"/></svg>
+          <h3>Przeciążenie działu IT</h3>
+          <p>Specjaliści tracą czas na powtarzalne zadania</p>
+        </div>
+        <div class="vt__solution">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#4be3a0" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5L20 7"/></svg>
+          <h3>Odciążenie zespołu IT</h3>
+          <p>Rutynowe procesy dzieją się automatycznie</p>
+        </div>
+        <span class="vt__link" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m6 13 6 6 6-6"/></svg></span>
+      </li>
+    </ul>
+
+    <div class="vt__cta">
+      <a class="btn" href="#kontakt">UMÓW PREZENTACJĘ</a>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

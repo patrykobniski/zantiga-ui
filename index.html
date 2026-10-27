@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wyzwania i rozwiązania — warianty</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#1b0848;
+  --bar:#120532;
+  --accent:#ff1fb4;
+  --muted:#c9bde6;
+  --line:rgba(255,255,255,.12);
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;display:flex;flex-direction:column;background:var(--bg);color:#fff;font-family:'Manrope',system-ui,sans-serif}
+.switcher{
+  flex:none;
+  display:flex;
+  align-items:center;
+  gap:18px;
+  min-height:64px;
+  padding:10px 20px;
+  background:var(--bar);
+  border-bottom:1px solid var(--line);
+}
+.switcher__label{
+  flex:none;
+  margin:0;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.14em;
+  color:var(--muted);
+}
+.switcher__options{
+  display:flex;
+  gap:8px;
+  min-width:0;
+  overflow-x:auto;
+  padding-bottom:2px;
+}
+.switcher__options::-webkit-scrollbar{height:0}
+.switcher button{
+  flex:none;
+  height:40px;
+  padding:0 16px;
+  border:1px solid var(--line);
+  border-radius:20px;
+  background:transparent;
+  color:#fff;
+  font:inherit;
+  font-size:14px;
+  font-weight:700;
+  letter-spacing:.01em;
+  cursor:pointer;
+}
+.switcher button:hover{border-color:var(--accent)}
+.switcher button[aria-checked="true"]{
+  background:var(--accent);
+  border-color:var(--accent);
+  color:var(--bg);
+}
+.switcher button:focus-visible{outline:2px solid #fff;outline-offset:3px}
+.preview{
+  flex:1;
+  min-height:0;
+  width:100%;
+  border:0;
+  background:var(--bg);
+}
+@media (max-width:760px){
+  .switcher{align-items:flex-start;flex-direction:column;gap:10px;padding:12px 14px}
+  .switcher button{height:36px;padding:0 12px;font-size:13px}
+}
+</style>
+</head>
+<body>
+<header class="switcher">
+  <p class="switcher__label" id="switcher-label">WARIANT</p>
+  <div class="switcher__options" role="radiogroup" aria-labelledby="switcher-label">
+    <button type="button" role="radio" data-variant="a" aria-checked="false">A · Pary w wierszach</button>
+    <button type="button" role="radio" data-variant="b" aria-checked="false">B · Kafle pionowe</button>
+    <button type="button" role="radio" data-variant="c" aria-checked="false">C · Kafle rozwijane</button>
+    <button type="button" role="radio" data-variant="d" aria-checked="false">D · Siatka kafli</button>
+  </div>
+</header>
+<iframe class="preview" id="preview" title="Podgląd wariantu sekcji"></iframe>
+<script>
+(function () {
+  var files = {
+    a: "sekcja-wariant-a-pary-w-wierszach.html",
+    b: "sekcja-wariant-b-kafle-pionowe.html",
+    c: "sekcja-wariant-c-kafle-rozwijane.html",
+    d: "sekcja-wariant-d-siatka-kafli.html"
+  };
+  var titles = {
+    a: "Wariant A — pary w wierszach",
+    b: "Wariant B — kafle pionowe",
+    c: "Wariant C — kafle rozwijane",
+    d: "Wariant D — siatka kafli"
+  };
+  var frame = document.getElementById("preview");
+  var buttons = Array.prototype.slice.call(document.querySelectorAll("[data-variant]"));
+
+  function current() {
+    var id = (location.hash || "#a").slice(1);
+    return files[id] ? id : "a";
+  }
+
+  function show(id, push) {
+    if (!files[id]) id = "a";
+    buttons.forEach(function (button) {
+      var on = button.getAttribute("data-variant") === id;
+      button.setAttribute("aria-checked", on ? "true" : "false");
+    });
+    frame.title = titles[id];
+    document.title = titles[id] + " · Zantiga";
+    if (frame.getAttribute("src") !== files[id]) frame.src = files[id];
+    if (push && location.hash !== "#" + id) history.pushState(null, "", "#" + id);
+  }
+
+  buttons.forEach(function (button) {
+    button.addEventListener("click", function () {
+      show(button.getAttribute("data-variant"), true);
+    });
+  });
+
+  window.addEventListener("hashchange", function () { show(current(), false); });
+  show(current(), false);
+})();
+</script>
+</body>
+</html>
